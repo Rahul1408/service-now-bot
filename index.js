@@ -1,9 +1,16 @@
 ﻿
 'use strict';
 const http = require('http');
+const express = require('express');
+
+
+const restService = express();
+
+
+
 const host = 'api.worldweatheronline.com';
 const wwoApiKey = 'e1affc06154840e8be8190125170708';
-exports.weatherWebhook = (req, res) => {
+restService.post('/getdetails', function(req, res) {
   // Get the city and date from the request
   var city = req.body.result.parameters['geo-city']; // city is a required param
   // Get the date for the weather forecast (if present)
@@ -22,7 +29,7 @@ exports.weatherWebhook = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({ 'speech': error, 'displayText': error }));
   });
-};
+});
 function callWeatherApi (city, date) {
   return new Promise((resolve, reject) => {
     // Create the path for the HTTP request to get the weather

@@ -41,7 +41,7 @@ function callWeatherApi (city, date) {
         var conditions = response['data']['current_condition'][0];
         var currentConditions = conditions['weatherDesc'][0]['value'];
         // Create response
-        let output = `Current conditions in the ${location['type']} 
+        var output = `Current conditions in the ${location['type']} 
         ${location['query']} are ${currentConditions} with a projected high of
         ${forecast['maxtempC']}°C or ${forecast['maxtempF']}°F and a low of 
         ${forecast['mintempC']}°C or ${forecast['mintempF']}°F on 

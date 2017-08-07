@@ -1,7 +1,8 @@
+
 'use strict';
 const http = require('http');
 const host = 'api.worldweatheronline.com';
-const wwoApiKey = 'e1affc06154840e8be8190125170708';
+const wwoApiKey = '[YOUR_API_KEY]';
 exports.weatherWebhook = (req, res) => {
   // Get the city and date from the request
   let city = req.body.result.parameters['geo-city']; // city is a required param
@@ -42,8 +43,8 @@ function callWeatherApi (city, date) {
         // Create response
         let output = `Current conditions in the ${location['type']} 
         ${location['query']} are ${currentConditions} with a projected high of
-        ${forecast['maxtempC']}캜 or ${forecast['maxtempF']}캟 and a low of 
-        ${forecast['mintempC']}캜 or ${forecast['mintempF']}캟 on 
+        ${forecast['maxtempC']}째C or ${forecast['maxtempF']}째F and a low of 
+        ${forecast['mintempC']}째C or ${forecast['mintempF']}째F on 
         ${forecast['date']}.`;
         // Resolve the promise with the output text
         console.log(output);

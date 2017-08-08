@@ -47,9 +47,11 @@ res.send(JSON.stringify({ 'speech': output, 'displayText': output,'source':'serv
 });
 }
     else
+    {
  issue=req.body.result.parameters['access']; // access is a required param        
     res.setHeader('Content-Type', 'application/json');
 res.send(JSON.stringify({ 'speech': 'I will raise Service Request. That module will be Coming soon', 'displayText': 'I will raise Service Request. That module will be Coming soon','source':'service-now-bot' }));
+    }
 
 })
 

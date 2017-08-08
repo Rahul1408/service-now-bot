@@ -37,7 +37,7 @@ var responseJSONObject = JSON.parse(JSON.stringify(body));
 var incidentNumber = responseJSONObject.result.number;
 console.log(incidentNumber + " number");
 // Create response
-var output = 'Incident Number for your issue is: '+incidentNumber +' Please check on Service Now further details' ;
+var output = 'Incident Number for your issue is: '+incidentNumber +'. Please check on Service Now further details' ;
 // Resolve the promise with the output text
 console.log(output);
 // Return the results of the weather API to API.AI

@@ -15,37 +15,30 @@ app.use(bodyParser.json());
 var host = 'http://api.worldweatheronline.com';
 var wwoApiKey = 'e1affc06154840e8be8190125170708';
 
-app.post('/', function (req, res) {
-    var options = {};
-    var city=req.body.result.parameters['geo-city']; // city is a required param
-    //var city='New York';
-    // Get the date for the weather forecast (if present)
-    var date = '';
-    if (req.body.result.parameters['date']) {
-        date = req.body.result.parameters['date'];
-        console.log('Date: ' + date);
-    }
-
-    console.log('Date: ' + date);    
-    var path = '/premium/v1/weather.ashx?format=json&num_of_days=1' +
-     '&q=' + encodeURIComponent(city) + '&key=' + wwoApiKey + '&date=' + date;
-    console.log('API Request: ' + host + path);
-   
-    options = {
-        url: host + path,        
+app.get('/', function (req, res) {
+    var bodyjson = {
+        "Request": {
+            "short_description": "VDI is not working",
+            "comments": "These are my comments"
+        }
     };
-    request.get(options, (err, resp, body) => {
+    var options = {
+        method: 'POST',
+        url: 'https://dev31468.service-now.com/api/now/v1/table/incident',
+        proxy:'http://proxy.gtm.lilly.com:9000',
+        body: {'short_description':'User getting error', 'comments':'logged from MS chat Bot'},
+        json: true,
+        headers: { 'Authorization': 'Basic YWRtaW46V2ViQDIwMTc=' }
+    };
+    console.log('Options' + options);
+    request.post(options, (err, resp, body) => {
         if (err) {
       console.log('error: ', err);
 } else {
- console.log(body);
-
-// After all the data has been received parse the JSON for desired data
-var response = JSON.parse(body);
-var forecast = response['data']['weather'][0];
-var location = response['data']['request'][0];
-var conditions = response['data']['current_condition'][0];
-var currentConditions = conditions['weatherDesc'][0]['value'];
+ 
+var responseJSONObject = JSON.parse(JSON.stringify(body));
+var incidentNumber = responseJSONObject.result.number;
+console.log(incidentNumber + " number");
 // Create response
 var output = 'Current conditions in the'+ location['type']+location['query']+' are '+currentConditions+' with a projected high of'+forecast['maxtempC']+'°C or'+forecast['maxtempF']
     +'°F and a low of'+ forecast['mintempC']+'°C or '+forecast['mintempF']+'°F on '+forecast['date'];

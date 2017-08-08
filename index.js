@@ -1,7 +1,20 @@
-var express = require('express');
+var express = require('express')
+  , stylus = require('stylus')
+  , nib = require('nib')
 var app = express()
 app.set('port', (process.env.PORT || 7000));
+
 var request = require('request');
+
+var bodyParser = require('body-parser');
+
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+app.use(bodyParser.json());
+
 var host = 'http://api.worldweatheronline.com';
 var wwoApiKey = 'e1affc06154840e8be8190125170708';
 app.get('/', function (req, res) {

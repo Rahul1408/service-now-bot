@@ -1,4 +1,4 @@
-var express = require('express');
+﻿var express = require('express');
 var app = express();
 
 var request = require('request');
@@ -12,20 +12,17 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-var host = 'http://api.worldweatheronline.com';
-var wwoApiKey = 'e1affc06154840e8be8190125170708';
 
-app.get('/', function (req, res) {
-    var bodyjson = {
-        "Request": {
-            "short_description": "VDI is not working",
-            "comments": "These are my comments"
-        }
-    };
-    var options = {
+app.post('/', function (req, res) {
+var action=req.body.result.action; //action SR/Incident
+var issue= '';
+if (action=='Issue')
+{
+ issue=req.body.result.parameters['issue']; // issue is a required param
+var options = {
         method: 'POST',
         url: 'https://dev31468.service-now.com/api/now/v1/table/incident',
-        proxy:'http://proxy.gtm.lilly.com:9000',
+        //proxy:'http://proxy.gtm.lilly.com:9000',
         body: {'short_description':'User getting error', 'comments':'logged from MS chat Bot'},
         json: true,
         headers: { 'Authorization': 'Basic YWRtaW46V2ViQDIwMTc=' }
@@ -40,13 +37,17 @@ var responseJSONObject = JSON.parse(JSON.stringify(body));
 var incidentNumber = responseJSONObject.result.number;
 console.log(incidentNumber + " number");
 // Create response
-var output = 'Current conditions in the'+ location['type']+location['query']+' are '+currentConditions+' with a projected high of'+forecast['maxtempC']+'°C or'+forecast['maxtempF']
-    +'°F and a low of'+ forecast['mintempC']+'°C or '+forecast['mintempF']+'°F on '+forecast['date'];
+var output = 'Incident Number for your issue is: '+incidentNumber +' Please check on Service Now further details' ;
 // Resolve the promise with the output text
 console.log(output);
 // Return the results of the weather API to API.AI
 res.setHeader('Content-Type', 'application/json');
-res.send(JSON.stringify({ 'speech': output, 'displayText': output,'source':'weather-sample' }));
+res.send(JSON.stringify({ 'speech': output, 'displayText': output,'source':'service-now-bot' }));
+}
+else
+ issue=req.body.result.parameters['access']; // access is a required param
+        
+    
 }
 });
 })

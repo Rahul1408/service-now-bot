@@ -1,6 +1,4 @@
-var express = require('express')
-  , stylus = require('stylus')
-  , nib = require('nib')
+var express = require('express');
 var app = express()
 app.set('port', (process.env.PORT || 7000));
 

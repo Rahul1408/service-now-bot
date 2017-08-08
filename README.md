@@ -1,2 +1,2 @@
-# Api.ai - sample webhook implementation.
+# Api.ai - Service-Now webhook implementation.
 

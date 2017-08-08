@@ -1,7 +1,3 @@
-
-var express = require('express');
-var app = express();
-
 var express = require('express');
 var app = express();
 
@@ -21,17 +17,6 @@ var wwoApiKey = 'e1affc06154840e8be8190125170708';
 
 app.post('/', function (req, res) {
     var options = {};
-    //var city=req.body.result.parameters['geo-city']; // city is a required param
-    var city='New York';
-    // Get the date for the weather forecast (if present)
-    var date = '';
-    //if (req.body.result.parameters['date']) {
-      //  date = req.body.result.parameters['date'];
-        //console.log('Date: ' + date);
-    //}
-
-app.get('/getweatheer', function (req, res) {
-    var options = {};
     var city=req.body.result.parameters['geo-city']; // city is a required param
     //var city='New York';
     // Get the date for the weather forecast (if present)
@@ -43,7 +28,7 @@ app.get('/getweatheer', function (req, res) {
 
     console.log('Date: ' + date);    
     var path = '/premium/v1/weather.ashx?format=json&num_of_days=1' +
-     '&q=' + encodeURIComponent(city) + '&key=' + wwoApiKey + '&date=' + '2017-08-08';
+     '&q=' + encodeURIComponent(city) + '&key=' + wwoApiKey + '&date=' + date;
     console.log('API Request: ' + host + path);
    
     options = {

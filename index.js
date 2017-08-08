@@ -15,16 +15,16 @@ app.use(bodyParser.json());
 
 var host = 'http://api.worldweatheronline.com';
 var wwoApiKey = 'e1affc06154840e8be8190125170708';
-app.get('/', function (req, res) {
+app.get('/getweatheer', function (req, res) {
     var options = {};
-    //var city=req.body.result.parameters['geo-city']; // city is a required param
-    var city='New York';
+    var city=req.body.result.parameters['geo-city']; // city is a required param
+    //var city='New York';
     // Get the date for the weather forecast (if present)
     var date = '';
-    //if (req.body.result.parameters['date']) {
-      //  date = req.body.result.parameters['date'];
-        //console.log('Date: ' + date);
-    //}
+    if (req.body.result.parameters['date']) {
+        date = req.body.result.parameters['date'];
+        console.log('Date: ' + date);
+    }
     console.log('Date: ' + date);    
     var path = '/premium/v1/weather.ashx?format=json&num_of_days=1' +
      '&q=' + encodeURIComponent(city) + '&key=' + wwoApiKey + '&date=' + '2017-08-08';

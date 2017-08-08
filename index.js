@@ -37,7 +37,7 @@ var responseJSONObject = JSON.parse(JSON.stringify(body));
 var incidentNumber = responseJSONObject.result.number;
 console.log(incidentNumber + " number");
 // Create response
-var output = 'Incident Number for your issue is: '+incidentNumber +'. Please check on Service Now further details' ;
+var output = 'I have raised the incident in Service Now for your issue. Incident Number for your issue is: '+incidentNumber +'. Please check on Service Now for further details';
 // Resolve the promise with the output text
 console.log(output);
 // Return the results of the weather API to API.AI
@@ -48,6 +48,9 @@ res.send(JSON.stringify({ 'speech': output, 'displayText': output,'source':'serv
 }
     else
  issue=req.body.result.parameters['access']; // access is a required param        
+    res.setHeader('Content-Type', 'application/json');
+res.send(JSON.stringify({ 'speech': 'I will raise Service Request. That module will be Coming soon', 'displayText': 'I will raise Service Request. That module will be Coming soon','source':'service-now-bot' }));
+
 })
 
 app.listen((process.env.PORT || 8000), function() {

@@ -44,8 +44,8 @@ console.log(output);
 res.setHeader('Content-Type', 'application/json');
 res.send(JSON.stringify({ 'speech': output, 'displayText': output,'source':'service-now-bot' }));
 }    
-}
 });
+}
     else
  issue=req.body.result.parameters['access']; // access is a required param        
 })

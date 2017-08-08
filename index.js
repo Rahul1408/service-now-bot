@@ -23,10 +23,10 @@ app.get('/', function (req, res) {
     var city='New York';
     // Get the date for the weather forecast (if present)
     var date = '';
-    if (req.body.result.parameters['date']) {
-        date = req.body.result.parameters['date'];
-        console.log('Date: ' + date);
-    }
+    //if (req.body.result.parameters['date']) {
+      //  date = req.body.result.parameters['date'];
+        //console.log('Date: ' + date);
+    //}
     console.log('Date: ' + date);    
     var path = '/premium/v1/weather.ashx?format=json&num_of_days=1' +
      '&q=' + encodeURIComponent(city) + '&key=' + wwoApiKey + '&date=' + '2017-08-08';

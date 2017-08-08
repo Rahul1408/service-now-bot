@@ -1,4 +1,4 @@
-﻿var express = require('express');
+var express = require('express');
 var app = express();
 
 var request = require('request');
@@ -23,7 +23,7 @@ var options = {
         method: 'POST',
         url: 'https://dev31468.service-now.com/api/now/v1/table/incident',
         //proxy:'http://proxy.gtm.lilly.com:9000',
-        body: {'short_description':'User getting error', 'comments':'logged from MS chat Bot'},
+        body: {'short_description':issue, 'comments':'logged from MS chat Bot'},
         json: true,
         headers: { 'Authorization': 'Basic YWRtaW46V2ViQDIwMTc=' }
     };
@@ -43,13 +43,11 @@ console.log(output);
 // Return the results of the weather API to API.AI
 res.setHeader('Content-Type', 'application/json');
 res.send(JSON.stringify({ 'speech': output, 'displayText': output,'source':'service-now-bot' }));
-}
-else
- issue=req.body.result.parameters['access']; // access is a required param
-        
-    
+}    
 }
 });
+    else
+ issue=req.body.result.parameters['access']; // access is a required param        
 })
 
 app.listen((process.env.PORT || 8000), function() {

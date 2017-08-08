@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 ﻿var express = require('express');
 var app = express();
+=======
+var express = require('express');
+var app = express()
+app.set('port', (process.env.PORT || 7000));
+>>>>>>> 89c7acae695d5468b7042ac7d1fb02bc3f8c9c9b
 
 var request = require('request');
 
@@ -14,6 +20,7 @@ app.use(bodyParser.json());
 
 var host = 'http://api.worldweatheronline.com';
 var wwoApiKey = 'e1affc06154840e8be8190125170708';
+<<<<<<< HEAD
 app.post('/', function (req, res) {
     var options = {};
     //var city=req.body.result.parameters['geo-city']; // city is a required param
@@ -24,6 +31,18 @@ app.post('/', function (req, res) {
       //  date = req.body.result.parameters['date'];
         //console.log('Date: ' + date);
     //}
+=======
+app.get('/getweatheer', function (req, res) {
+    var options = {};
+    var city=req.body.result.parameters['geo-city']; // city is a required param
+    //var city='New York';
+    // Get the date for the weather forecast (if present)
+    var date = '';
+    if (req.body.result.parameters['date']) {
+        date = req.body.result.parameters['date'];
+        console.log('Date: ' + date);
+    }
+>>>>>>> 89c7acae695d5468b7042ac7d1fb02bc3f8c9c9b
     console.log('Date: ' + date);    
     var path = '/premium/v1/weather.ashx?format=json&num_of_days=1' +
      '&q=' + encodeURIComponent(city) + '&key=' + wwoApiKey + '&date=' + '2017-08-08';
@@ -55,6 +74,16 @@ res.send(JSON.stringify({ 'speech': output, 'displayText': output,'source':'weat
 }
 });
 })
+<<<<<<< HEAD
 app.listen((process.env.PORT || 8000), function() {
     console.log("Server up and listening");
 });
+=======
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
+module.exports = app;
+
+
+
+>>>>>>> 89c7acae695d5468b7042ac7d1fb02bc3f8c9c9b

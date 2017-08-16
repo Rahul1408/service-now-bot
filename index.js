@@ -46,7 +46,7 @@ res.send(JSON.stringify({ 'speech': output, 'displayText': output,'source':'serv
 }    
 });
 }
-    else if(issue=='Access')
+    else if(action=='Access')
     {
  issue=req.body.result.parameters['access']; // access is a required param        
     res.setHeader('Content-Type', 'application/json');

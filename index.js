@@ -37,7 +37,7 @@ var responseJSONObject = JSON.parse(JSON.stringify(body));
 var incidentNumber = responseJSONObject.result.number;
 console.log(incidentNumber + " number");
 // Create response
-var output = 'I have raised the incident in Service Now for your issue '+issue+ '. Incident Number for your issue is: '+incidentNumber +'. Please check on Service Now for further details or contact us on https://knome.ultimatix.net/communities/16066buittechnicallab';
+var output = 'I have raised the incident in Service Now for your issue. Incident Number for your issue is: '+incidentNumber +'. Please check on Service Now for further details or contact us on https://knome.ultimatix.net/communities/16066buittechnicallab';
 // Resolve the promise with the output text
 console.log(output);
 // Return the results of the weather API to API.AI

@@ -18,7 +18,7 @@ var action=req.body.result.action; //action SR/Incident
 var issue= '';
 if (action=='Issue')
 {
- issue=req.body.result.parameters['issue']; // issue is a required param
+ issue=req.body.result.parameters['description']; // issue is a required param
 var options = {
         method: 'POST',
         url: 'https://dev31468.service-now.com/api/now/v1/table/incident',

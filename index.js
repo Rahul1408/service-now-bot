@@ -15,15 +15,15 @@ app.use(bodyParser.json());
 
 app.post('/', function (req, res) {
 var action=req.body.result.action; //action SR/Incident
-var issue= '';
+var issueDescription= '';
 if (action=='Issue')
 {
- issue=req.body.result.parameters['issue']; // issue is a required param
+ issueDescription=req.body.result.parameters['description']; // issue is a required param
 var options = {
         method: 'POST',
         url: 'https://dev31468.service-now.com/api/now/v1/table/incident',
         //proxy:'http://proxy.gtm.lilly.com:9000',
-        body: {'short_description':issue, 'comments':'logged from MS chat Bot'},
+        body: {'short_description':issueDescription, 'comments':'logged from MS chat Bot'},
         json: true,
         headers: { 'Authorization': 'Basic YWRtaW46V2ViQDIwMTc=' }
     };
@@ -48,7 +48,7 @@ res.send(JSON.stringify({ 'speech': output, 'displayText': output,'source':'serv
 }
     else if(action=='Access')
     {
- issue=req.body.result.parameters['access']; // access is a required param        
+ issueDescription=req.body.result.parameters['access']; // access is a required param        
     res.setHeader('Content-Type', 'application/json');
 res.send(JSON.stringify({ 'speech': 'I will raise Service Request. That module will be Coming soon', 'displayText': 'I will raise Service Request. That module will be Coming soon','source':'service-now-bot' }));
     }

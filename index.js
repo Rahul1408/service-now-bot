@@ -48,12 +48,35 @@ res.send(JSON.stringify({ 'speech': output, 'displayText': output,'source':'serv
 }
     else if(action=='Access')
     {
- issue=req.body.result.parameters['access']; // access is a required param        
+ issue=req.body.result.parameters['projectName']; // access is a required param        
+        var options = {
+        method: 'POST',
+        url: 'https://dev31468.service-now.com/api/now/v1/table/sc_req_item',
+        //proxy:'http://proxy.gtm.lilly.com:9000',
+        body: {'short_description':issue, 'comments':'logged from MS chat Bot'},
+        json: true,
+        headers: { 'Authorization': 'Basic YWRtaW46V2ViQDIwMTc=' }
+    };
+    console.log('Options' + options);
+    request.post(options, (err, resp, body) => {
+        if (err) {
+      console.log('error: ', err);
+} else {
+ 
+var responseJSONObject = JSON.parse(JSON.stringify(body));
+var SRNumber = responseJSONObject.result.number;
+console.log(SRNumber + " SRNumber");
+// Create response
+var output = 'I have raised the Service Request in Service Now for your access on '+issue+'. SR Number is: '+SRNumber +'. Please check on Service Now for further details or contact us on https://knome.ultimatix.net/communities/16066buittechnicallab';
+// Resolve the promise with the output text
+console.log(output);
+// Return the results of the weather API to API.AI
     res.setHeader('Content-Type', 'application/json');
-res.send(JSON.stringify({ 'speech': 'I will raise a Service Request for you. That module will be Coming soon. Please contact us on https://knome.ultimatix.net/communities/16066buittechnicallab', 'displayText': 'I will raise Service Request. That module will be Coming soon','source':'service-now-bot' }));
+res.send(JSON.stringify({ 'speech': output, 'displayText': output,'source':'service-now-bot' }));
     }
 
-})
+});
+    }
 
 app.listen((process.env.PORT || 8000), function() {
     console.log("Server up and listening");

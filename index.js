@@ -77,7 +77,7 @@ res.send(JSON.stringify({ 'speech': output, 'displayText': output,'source':'serv
 
 });
     }
-
+})
 app.listen((process.env.PORT || 8000), function() {
     console.log("Server up and listening");
 });

@@ -22,7 +22,7 @@ if (action=='Issue')
 var options = {
         method: 'POST',
         url: 'https://dev31468.service-now.com/api/now/v1/table/incident',
-        //proxy:'http://proxy.gtm.lilly.com:9000',
+
         body: {'short_description':issue, 'comments':'logged from MS chat Bot'},
         json: true,
         headers: { 'Authorization': 'Basic YWRtaW46V2ViQDIwMTc=' }
@@ -52,7 +52,6 @@ res.send(JSON.stringify({ 'speech': output, 'displayText': output,'source':'serv
         var options = {
         method: 'POST',
         url: 'https://dev31468.service-now.com/api/now/v1/table/sc_req_item',
-        //proxy:'http://proxy.gtm.lilly.com:9000',
         body: {'short_description':issue, 'comments':'logged from MS chat Bot'},
         json: true,
         headers: { 'Authorization': 'Basic YWRtaW46V2ViQDIwMTc=' }
